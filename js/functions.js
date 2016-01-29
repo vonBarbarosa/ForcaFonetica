@@ -17,8 +17,11 @@ var app = {
 	init: function() {
 		//alert("foi");
 		this.bindEvents();
+		/*
 		this.getNewWord();
 		this.writeWord();
+		*/
+		app.newGame();
 	},
 
 	bindEvents: function() {
@@ -44,6 +47,74 @@ var app = {
 		alert("");
 	},
 	*/
+
+	//turns string into array of phonetic chars
+	str2phon: function(string){
+		var phonStr = new Array();
+
+		for (var i = 0; i < string.length; i++) {
+			switch (string[i]){
+				//for testing 'dʒ'
+				case 'd':
+					if(string[i+1] == 'ʒ'){
+						phonStr.push('dʒ');
+						i++;
+					}
+					else
+						phonStr.push(string[i]);
+					break;
+				//for testing 'tʃ'
+				case 't':
+					if(string[i+1] == 'ʃ'){
+						phonStr.push('tʃ');
+						i++;
+					}
+					else
+						phonStr.push(string[i]);
+					break;
+				//for testing 'lʲ'
+				case 'l':
+					if(string[i+1] == 'ʲ'){
+						phonStr.push('lʲ');
+						i++;
+					}
+					else
+						phonStr.push(string[i]);
+					break;
+				//for testing 'ɪ̯'
+				case 'ɪ':
+					if(string[i+1] == '̯'){
+						phonStr.push('ɪ̯');
+						i++;
+					}
+					else
+						phonStr.push(string[i]);
+					break;
+				//for testing 'ʊ̯'
+				case 'ʊ':
+					if(string[i+1] == '̯'){
+						phonStr.push('ʊ̯');
+						i++;
+					}
+					else
+						phonStr.push(string[i]);
+					break;
+
+				default:
+					phonStr.push(string[i]);
+					break;
+			}
+		};
+		return phonStr;
+	},
+
+	array2phon: function(arr){
+		var newArr = new Array();
+		for (var i = 0; i < arr.length; i++) {
+			newArr.push(app.str2phon(arr[i]));
+		};
+		return newArr;
+	},
 
 	getNewWord: function(){
 		currentWord.index++;
@@ -79,6 +150,8 @@ var app = {
 				currentWord.phonology = ["ˈdeʊ̯s","ˈdeʊ̯ʃ"];
 				break;
 		}
+
+		currentWord.phonology = app.array2phon(currentWord.phonology);
 	},
 
 	//puts currentWord ortography and phonologic transcription on designed places
@@ -91,6 +164,7 @@ var app = {
 	writePhon: function(){
 		$("#campo-foco2").text("");
 		for (var i = 0; i < currentWord.phonology[0].length; i++) {
+			//detail: there are 2 different chars for apostrophe
 			if ((currentWord.phonology[0][i]) == "." ||
 			    (currentWord.phonology[0][i]) == "'" || 
 			    (currentWord.phonology[0][i]) == "ˈ"){
@@ -106,22 +180,30 @@ var app = {
 	putLetter:function(letter){
 		var currentWordState = $("#campo-foco2").text();
 		var newWordState = "";
-		for (var i = 0; i < currentWord.phonology[0].length; i++) {
-			//testing if a blank space for letter is found
-			if (currentWordState[2*i] == "_"){
-				if (letter == currentWord.phonology[0][i]) {
-					newWordState += letter + " ";
+		
+		//loop for each different phonetic form
+		for(var j=0; j<currentWord.phonology.length; j++){
+			//loop for each phonetic char
+			for (var i = 0; i < currentWord.phonology[j].length; i++) {
+				//testing if a blank space for letter is found
+				if (currentWordState[2*i] == "_"){
+					if (letter == currentWord.phonology[j][i]) {
+						newWordState += letter + " ";
+					}
+					else{
+						newWordState += "_ ";
+					}
 				}
-				else{
-					newWordState += "_ ";
+				else {
+					newWordState += currentWordState[2*i] + currentWordState[1+2*i];
 				}
-			}
-			else {
-				newWordState += currentWordState[2*i] + currentWordState[1+2*i];
-			}
+			};
+			//save state and resets new word
+			currentWordState = newWordState;
+			newWordState = "";
 		};
-		$("#campo-foco2").text(newWordState);
-		if (app.victory(newWordState)){
+		$("#campo-foco2").text(currentWordState);
+		if (app.victory(currentWordState)){
 			alert("ganhou!");
 			app.newGame()
 		}
