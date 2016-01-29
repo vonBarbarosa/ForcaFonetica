@@ -2,7 +2,8 @@ var currentWord = {
 			index: -1,
 			ortography: "",
 			phonology: [],
-			alternative: []
+			alternative: [],
+			answered: []
 	};
 
 //TODO phonologgy pra array
@@ -26,19 +27,15 @@ var app = {
 
 	bindEvents: function() {
 		//???
-		document.addEventListener('onClick', this.btnphonButtonEvent, false);
+		//document.addEventListener('onClick', this.btnphonButtonEvent, false);
 
-		//listener from the buttons
+		//listener for the buttons
 		$(".btn-phon").on("click", function(){
-			//$(this).addClass("btn-danger");
-			//$(this).removeClass("btn-primary");	
+
 			$(this).addClass("disabled");
 
 			var letter = $(this).text();
 			app.putLetter(letter);
-			//var texto = $(this).text();
-			//$("#campo-foco2").text(texto);
-			//alert("jQuery foi" + texto);
 		});
 
 	},
@@ -137,7 +134,7 @@ var app = {
 			case 3:
 				//colocar koloˈkah
 				currentWord.ortography = "colocar";
-				currentWord.phonology = ["koloˈkah", "koloˈkax", "koloˈkaɾ", "koloˈkaɹ"];
+				currentWord.phonology = ["ko.lo.ˈkah", "ko.lo.ˈkax", "ko.lo.ˈkaɾ", "ko.lo.ˈkaɹ"];
 				break;
 			case 4:
 				//contra ˈkõ.tɾə
@@ -152,6 +149,20 @@ var app = {
 		}
 
 		currentWord.phonology = app.array2phon(currentWord.phonology);
+
+		//INSIGHT: this part might better be in a separated function for reusability
+		currentWord.answered = new Array();
+		for (var i = 0; i < currentWord.phonology[0].length; i++) {
+			//detail: there are 2 different chars for apostrophe
+			if ((currentWord.phonology[0][i]) == "." ||
+			    (currentWord.phonology[0][i]) == "'" || 
+			    (currentWord.phonology[0][i]) == "ˈ"){
+					currentWord.answered.push(currentWord.phonology[0][i]);
+			}
+			else {
+				currentWord.answered.push("_");
+			}
+		};
 	},
 
 	//puts currentWord ortography and phonologic transcription on designed places
@@ -160,50 +171,45 @@ var app = {
 		app.writePhon();
 	},
 
-	//writes phonologic writing (plus spaces after every char), supressing the phonetic letters, leaving only "." and "'"
+	//prints what's already answered on #campo-foco2, plus spaces
 	writePhon: function(){
 		$("#campo-foco2").text("");
-		for (var i = 0; i < currentWord.phonology[0].length; i++) {
-			//detail: there are 2 different chars for apostrophe
-			if ((currentWord.phonology[0][i]) == "." ||
-			    (currentWord.phonology[0][i]) == "'" || 
-			    (currentWord.phonology[0][i]) == "ˈ"){
-				$("#campo-foco2").append(currentWord.phonology[0][i] + " ");
-			}
-			else {
-				$("#campo-foco2").append("_ ");
-			}
+		for (var i = 0; i < currentWord.answered.length; i++) {
+			$("#campo-foco2").append(currentWord.answered[i] + " ");
+			
 		};
 	},
 
 	//tests new symbol input and refreshes guessing word
-	putLetter:function(letter){
-		var currentWordState = $("#campo-foco2").text();
-		var newWordState = "";
+	putLetter: function(letter){
+		var newWordState = new Array();
 		
 		//loop for each different phonetic form
 		for(var j=0; j<currentWord.phonology.length; j++){
 			//loop for each phonetic char
 			for (var i = 0; i < currentWord.phonology[j].length; i++) {
 				//testing if a blank space for letter is found
-				if (currentWordState[2*i] == "_"){
+				if (currentWord.answered[i] == "_"){
 					if (letter == currentWord.phonology[j][i]) {
-						newWordState += letter + " ";
+						newWordState.push(letter);
 					}
 					else{
-						newWordState += "_ ";
+						newWordState.push("_");
 					}
 				}
 				else {
-					newWordState += currentWordState[2*i] + currentWordState[1+2*i];
+					newWordState.push(currentWord.answered[i]);
 				}
 			};
-			//save state and resets new word
-			currentWordState = newWordState;
-			newWordState = "";
+			//refreshes guessing word and resets newWordState for next phonology
+			currentWord.answered = newWordState;
+			newWordState = new Array();
 		};
-		$("#campo-foco2").text(currentWordState);
-		if (app.victory(currentWordState)){
+		//prints on proper place #campo-foco2
+		app.writePhon();
+
+		//tests victory and acts accordingly
+		if (app.victory(currentWord.answered)){
 			alert("ganhou!");
 			app.newGame()
 		}
