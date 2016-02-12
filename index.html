@@ -1,59 +1,118 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<script >
-    
-
-</script>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="msapplication-tap-highlight" content="no" />
-        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+    <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-        <!-- -->
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-        <title>Forca Fonética</title>
-    </head>
-    <body>
+    <title>Forca Fonética</title>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="text-center"> Forca Fonética</h1>
+    </div>
+    <!-- 47 buttons-->
+    <!-- source= http://symbolcodes.tlt.psu.edu/bylanguage/ipachart.html -->
+    <div class="container">
+        <div class="text-center"><div id="campo-foco1" class="well"> </div></div>
 
-        <div class="jumbotron">
-            <h1 class="text-center"> Forca Fonética</h1>
+        <div class="text-center"><div id="campo-foco2" class="well"> </div></div>
+
+        <div id="button-container" align="center">
+            <div id="cons-container" >
+                <div align="right">
+                    <button class="btn-phon btn btn-primary" type="button">p</button>
+                    <button class="btn-phon btn btn-primary" type="button">b</button>
+                    <button class="btn-phon btn btn-primary" type="button">t</button>
+                    <button class="btn-phon btn btn-primary" type="button">d</button>
+                    <button class="btn-phon btn btn-primary" type="button">k</button>
+                    <button class="btn-phon btn btn-primary" type="button">g</button>
+                    <button class="btn-phon btn btn-primary" type="button">tʃ</button>
+                    <button class="btn-phon btn btn-primary" type="button">dʒ</button>
+                </div>
+
+                <div align="right">
+                    <button class="btn-phon btn btn-primary" type="button">f</button>
+                    <button class="btn-phon btn btn-primary" type="button">v</button>
+                    <button class="btn-phon btn btn-primary" type="button">s</button>
+                    <button class="btn-phon btn btn-primary" type="button">z</button>
+                    <button class="btn-phon btn btn-primary" type="button">ʃ</button>
+                    <button class="btn-phon btn btn-primary" type="button">ʒ</button>
+                </div>
+
+                <div align="right">
+                    <button class="btn-phon btn btn-primary" type="button">w</button>
+                    <button class="btn-phon btn btn-primary" type="button">ɫ</button>
+                    <button class="btn-phon btn btn-primary" type="button">l</button>
+                    <button class="btn-phon btn btn-primary" type="button">ʎ</button>
+                    <button class="btn-phon btn btn-primary" type="button">lʲ</button>
+                </div>
+
+                <div align="right">
+                    <button class="btn-phon btn btn-primary" type="button">m</button>
+                    <button class="btn-phon btn btn-primary" type="button">n</button>
+                    <button class="btn-phon btn btn-primary" type="button">ɲ</button>
+                    <button class="btn-phon btn btn-primary" type="button">ỹ</button>
+                </div>
+
+                <div align="right">
+                    <button class="btn-phon btn btn-primary" type="button">x</button>
+                    <button class="btn-phon btn btn-primary" type="button">ɣ</button>
+                    <button class="btn-phon btn btn-primary" type="button">h</button>
+                    <button class="btn-phon btn btn-primary" type="button">ɦ</button>
+                </div>
+
+                <div align="right">
+                    <button class="btn-phon btn btn-primary" type="button">ɾ</button>
+                    <button class="btn-phon btn btn-primary" type="button">ɹ</button>
+                    <button class="btn-phon btn btn-primary" type="button">ř</button>
+                </div>
+            </div>
+            <div id="vowel-container">
+                <div align="left">
+                    <button class="btn-phon btn btn-success" type="button">i</button>
+                    <button class="btn-phon btn btn-success" type="button">e</button>
+                    <button class="btn-phon btn btn-success" type="button">ɛ</button>
+                    <button class="btn-phon btn btn-success" type="button">a</button>
+                    <button class="btn-phon btn btn-success" type="button">ɔ</button>
+                    <button class="btn-phon btn btn-success" type="button">o</button>
+                    <button class="btn-phon btn btn-success" type="button">u</button>
+                </div>
+
+                <div align="left">
+                    <button class="btn-phon btn btn-success" type="button">ĩ</button>
+                    <button class="btn-phon btn btn-success" type="button">ẽ</button>
+                    <button class="btn-phon btn btn-success" type="button">ã</button>
+                    <button class="btn-phon btn btn-success" type="button">õ</button>
+                    <button class="btn-phon btn btn-success" type="button">ũ</button>
+                </div>
+
+                <div align="left">
+                    <button class="btn-phon btn btn-success" type="button">ɪ</button>
+                    <button class="btn-phon btn btn-success" type="button">ə</button>
+                    <button class="btn-phon btn btn-success" type="button">ʊ</button>
+                </div>
+
+                <div align="left">
+                    <button class="btn-phon btn btn-success" type="button">ɪ̯</button>
+                    <button class="btn-phon btn btn-success" type="button">ʊ̯</button>
+                </div>
+            </div>
         </div>
-        <!-- 47 buttons-->
-        <!-- source= http://symbolcodes.tlt.psu.edu/bylanguage/ipachart.html -->
-        <div class="container">
-            <div class="text-center"><div id="campo-foco1" class="well"> </div></div>
-            <br><br>
-            <div class="text-center"><div id="campo-foco2" class="well"> </div></div>
-            <br><br>
+
+        <!-- Old rows -->
+        <div id="old-rows">
             <div class="row">
                 <div class="col-xs-2 col-md-1">
                     <a href="#" id="btn-1" class="btn-phon btn btn-block btn-primary">a</a>
@@ -193,27 +252,24 @@
                 <div class="col-xs-2 col-md-1"> <!-- /?/ - I romano com curva embaixo &#618;&#x032F; -->
                     <a href="#" id="btn-45" class="btn-phon btn btn-block btn-primary">ɪ̯</a>
                 </div>
-                <div class="col-xs-2 col-md-1"> <!-- /?/ - ferradura com curva embaixo &#650;&#x032F; --> 
+                <div class="col-xs-2 col-md-1"> <!-- /?/ - ferradura com curva embaixo &#650;&#x032F; -->
                     <a href="#" id="btn-46" class="btn-phon btn btn-block btn-primary">ʊ̯</a>
                 </div>
                 <div class="col-xs-2 col-md-1"> <!-- /ó/ - c invertido &#596; -->
                     <a href="#" id="btn-47" class="btn-phon btn btn-block btn-primary">ɔ</a>
                 </div>
-                
-
             </div>
-        </div>  
+        </div>
+    </div>
 
 
 
-        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-        <!-- <script type="text/javascript" src="cordova.js"></script> -->
-        <!-- <script type="text/javascript" src="js/index.js"></script> -->
-        <script type="text/javascript" src="js/functions.js"></script>
-        <script type="text/javascript">
-            app.init();
-        </script>
-    </body>
+
+    <script type="text/javascript" src="js/functions.js"></script>
+    <script type="text/javascript">
+    app.init();
+    </script>
+</body>
 </html>

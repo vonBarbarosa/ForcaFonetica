@@ -6,8 +6,6 @@ var currentWord = {
 			answered: []
 	};
 
-//TODO phonologgy pra array
-
 var app = {
 	/*
 	currentWord: {
@@ -18,17 +16,10 @@ var app = {
 	init: function() {
 		//alert("foi");
 		this.bindEvents();
-		/*
-		this.getNewWord();
-		this.writeWord();
-		*/
 		app.newGame();
 	},
 
 	bindEvents: function() {
-		//???
-		//document.addEventListener('onClick', this.btnphonButtonEvent, false);
-
 		//listener for the buttons
 		$(".btn-phon").on("click", function(){
 
@@ -155,7 +146,7 @@ var app = {
 		for (var i = 0; i < currentWord.phonology[0].length; i++) {
 			//detail: there are 2 different chars for apostrophe
 			if ((currentWord.phonology[0][i]) == "." ||
-			    (currentWord.phonology[0][i]) == "'" || 
+			    (currentWord.phonology[0][i]) == "'" ||
 			    (currentWord.phonology[0][i]) == "ˈ"){
 					currentWord.answered.push(currentWord.phonology[0][i]);
 			}
@@ -176,14 +167,14 @@ var app = {
 		$("#campo-foco2").text("");
 		for (var i = 0; i < currentWord.answered.length; i++) {
 			$("#campo-foco2").append(currentWord.answered[i] + " ");
-			
+
 		};
 	},
 
 	//tests new symbol input and refreshes guessing word
 	putLetter: function(letter){
 		var newWordState = new Array();
-		
+
 		//loop for each different phonetic form
 		for(var j=0; j<currentWord.phonology.length; j++){
 			//loop for each phonetic char
@@ -210,7 +201,7 @@ var app = {
 
 		//tests victory and acts accordingly
 		if (app.victory(currentWord.answered)){
-			alert("ganhou!");
+			alert("Parabéns, você acertou!");
 			app.newGame()
 		}
 	},

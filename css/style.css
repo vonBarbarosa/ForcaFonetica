@@ -1,9 +1,33 @@
+#old-rows {
+	display: none;
+}
+
+#cons-container{
+	margin-bottom: 20px;
+	margin-right: 50px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#vowel-container{
+    display: inline-block;
+    vertical-align: top;
+	margin-right: 50px;
+
+}
+
+.container .text-center {
+	margin: 0 0 40px 0;
+}
+
 .jumbotron {
-	background-color: #F83
+	background-color: #F83;
 }
 
 .btn-phon {
-	margin-bottom: 5px;
+	width: 40px;
+	margin: 5px;
+	padding: 6px;
 }
 
 .well {
