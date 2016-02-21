@@ -6,45 +6,6 @@ var currentWord = {
 	answered: []
 };
 
-var wordsDB = [
-	{
-		//agora a.ˈgɔ.rə
-		id: 0,
-		ortography : "agora",
-		phonology : ["a.'gɔ.ɾə"]
-	},
-	{
-		//chamado ʃa.ˈma.dʊ
-		id: 1,
-		ortography : "chamado",
-		phonology : ["ʃa.ˈma.dʊ"]
-	},
-	{
-		//desde ˈdez.dʒɪ
-		id: 2,
-		ortography : "desde",
-		phonology : ["ˈdez.dʒɪ", "ˈdez.dɪ"]
-	},
-	{
-		//colocar koloˈkah
-		id: 3,
-		ortography : "colocar",
-		phonology : ["ko.lo.ˈkah", "ko.lo.ˈkax", "ko.lo.ˈkaɾ", "ko.lo.ˈkaɹ"]
-	},
-	{
-		//contra ˈkõ.tɾə
-		id: 4,
-		ortography : "contra",
-		phonology : ["ˈkõ.tɾə"]
-	},
-	{
-		//deus ˈdeʊ̯s
-		id: 5,
-		ortography : "deus",
-		phonology : ["ˈdeʊ̯s","ˈdeʊ̯ʃ"]
-	}
-];
-
 var app = {
 
 init: function() {
@@ -144,12 +105,8 @@ phon2str: function(phon_arr){
 getNewWord: function(){
 	currentWord.index++;
 
-	//
 	currentWord.ortography = wordsDB[currentWord.index].ortography;
 	currentWord.phonology = app.array2phon(wordsDB[currentWord.index].phonology);
-
-
-	//currentWord.phonology = app.array2phon(currentWord.phonology);
 
 	//INSIGHT: this part might better be in a separated function for reusability
 	currentWord.answered = new Array();
