@@ -1,5 +1,5 @@
 var currentWord = {
-	index: 2,
+	index: -1,
 	ortography: "",
 	phonology: [],
 	alternative: [],
