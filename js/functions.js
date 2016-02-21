@@ -1,5 +1,5 @@
 var currentWord = {
-	index: -1,
+	index: 2,
 	ortography: "",
 	phonology: [],
 	alternative: [],
@@ -46,20 +46,14 @@ var wordsDB = [
 ];
 
 var app = {
-	/*
-	currentWord: {
-	ortography: "",
-	phonology: ""
-},*/
 
 init: function() {
-	//alert("foi");
 	this.bindEvents();
 	app.newGame();
 },
 
+//listener for the buttons
 bindEvents: function() {
-	//listener for the buttons
 	$(".btn-phon").on("click", function(){
 
 		$(this).addClass("disabled");
@@ -69,11 +63,6 @@ bindEvents: function() {
 	});
 
 },
-/*
-btnphonButtonEvent: function(){
-alert("");
-},
-*/
 
 //turns string into array of phonetic chars
 str2phon: function(string){
@@ -141,6 +130,15 @@ array2phon: function(arr){
 		newArr.push(app.str2phon(arr[i]));
 	};
 	return newArr;
+},
+
+//turns phonetic array into string, for printing purposes
+phon2str: function(phon_arr){
+	var str = "";
+	phon_arr.forEach(function(phon_sym){
+		str += phon_sym;
+	});
+	return str;
 },
 
 getNewWord: function(){
@@ -220,13 +218,16 @@ putLetter: function(letter){
 
 //shows congratulations message
 congratulate: function(){
-	//if (currentWord.phonology.length <= 1){
-		alert("Parabéns, você acertou!");
-	//}
-	//else {
-		//alert("Parabéns, você acertou!\nEsta palavra possui várias transcrições fonéticas: " + currentWord.phonology.forEach(function(item){return item.forEach(function(symb){return symb;}) + " ";}));
-	//}
+	var message = "Parabéns, você acertou!";
 
+	//checks for multiple phonetic writings and print them together
+	if (currentWord.phonology.length > 1){
+		message += "\nEsta palavra possui várias transcrições fonéticas:\n";
+		currentWord.phonology.forEach(function(phon_form){
+			message += app.phon2str(phon_form) + "\n";
+		});
+	};
+	alert(message);
 },
 
 //tests victory, returns true or false
