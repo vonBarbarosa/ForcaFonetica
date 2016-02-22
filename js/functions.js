@@ -215,7 +215,12 @@ gameOver: function(){
 
 loseOneChance: function(){
 	this.chances.current--;
-	$("#chances").text(this.chances.current);
+	app.refreshHangman();
+},
+
+refreshHangman: function(){
+	//$("#chances").text(this.chances.current);
+	$("#chances").attr("src", "img/forca-" + this.chances.current + ".png");
 },
 
 //tests victory, returns true or false
@@ -233,7 +238,7 @@ victory: function(){
 newGame: function(){
 	//resets chances
 	this.chances.current = this.chances.MAX;
-	$("#chances").text(this.chances.current);
+	app.refreshHangman();
 	app.resetbuttons();
 	app.getNewWord();
 	app.writeWord();

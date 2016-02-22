@@ -1,10 +1,16 @@
+img#chances {
+	margin-top: -210px;
+	position: absolute;
+	margin-left: -20px;
+}
+
 #old-rows {
 	display: none;
 }
 
 #cons-container{
 	margin-bottom: 20px;
-	margin-right: 50px;
+	margin-right: 30px;
     display: inline-block;
     vertical-align: top;
 }
@@ -17,7 +23,7 @@
 }
 
 .container .text-center {
-	margin: 0 0 40px 0;
+	margin: 10px 0 40px 0;
 }
 
 .jumbotron {
