@@ -8,21 +8,37 @@ var currentWord = {
 
 var app = {
 
+chances: {
+	//const value
+	MAX: 6,
+	current: 0
+},
+
 init: function() {
-	this.bindEvents();
+	app.bindEvents();
 	app.newGame();
 },
 
 //listener for the buttons
 bindEvents: function() {
 	$(".btn-phon").on("click", function(){
-
 		$(this).addClass("disabled");
-
 		var letter = $(this).text();
-		app.putLetter(letter);
-	});
+		//tries to fit letter, if no match, chances--
+		if (!app.putLetter(letter)){
+			app.loseOneChance();
+		};
 
+		//checks if game is over
+		if (app.chancesAreOver()){
+			app.gameOver();
+		}
+		//tests victory and acts accordingly
+		else if (app.victory()){
+			app.congratulate();
+			app.newGame()
+		}
+	});
 },
 
 //turns string into array of phonetic chars
@@ -138,8 +154,9 @@ writePhon: function(){
 	};
 },
 
-//tests new symbol input and refreshes guessing word
+//tests new symbol input and refreshes guessing word; returns true if there is any match
 putLetter: function(letter){
+	var match = false;
 	var newWordState = new Array();
 
 	//loop for each different phonetic form
@@ -150,6 +167,7 @@ putLetter: function(letter){
 			if (currentWord.answered[i] == "_"){
 				if (letter == currentWord.phonology[j][i]) {
 					newWordState.push(letter);
+					match = true;
 				}
 				else{
 					newWordState.push("_");
@@ -166,11 +184,7 @@ putLetter: function(letter){
 	//prints on proper place #campo-foco2
 	app.writePhon();
 
-	//tests victory and acts accordingly
-	if (app.victory(currentWord.answered)){
-		app.congratulate();
-		app.newGame()
-	}
+	return match;
 },
 
 //shows congratulations message
@@ -187,10 +201,27 @@ congratulate: function(){
 	alert(message);
 },
 
+//returns true if chances are already over
+chancesAreOver: function(){
+	return (this.chances.current<= 0);
+},
+
+//game over procedure
+gameOver: function(){
+
+	alert("Tente novamente")
+	app.newGame();
+},
+
+loseOneChance: function(){
+	this.chances.current--;
+	$("#chances").text(this.chances.current);
+},
+
 //tests victory, returns true or false
-victory: function(newWordState){
+victory: function(){
 	//if no more blank spaces
-	if (newWordState.indexOf("_") === -1){
+	if (currentWord.answered.indexOf("_") === -1){
 		return true;
 	}
 	else{
@@ -198,8 +229,11 @@ victory: function(newWordState){
 	}
 },
 
-//functions for seting a new game
+//functions for setting a new game
 newGame: function(){
+	//resets chances
+	this.chances.current = this.chances.MAX;
+	$("#chances").text(this.chances.current);
 	app.resetbuttons();
 	app.getNewWord();
 	app.writeWord();

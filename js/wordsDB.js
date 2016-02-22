@@ -1,3 +1,8 @@
+/*
+ *  This file creates the words DataBase and shuffles it
+ */
+
+// https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm
 function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -7,7 +12,6 @@ function shuffleArray(array) {
     }
     return array;
 }
-
 
 var wordsDB = [
 	{
