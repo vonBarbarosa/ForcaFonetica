@@ -60,7 +60,7 @@ var wordsDB = [
 		//amar
 		id: 7,
 		ortography : "amar",
-		phonology : ["a.ˈmɑh","a.ˈmɑx", "a.ˈmɑɾ","a.ˈmɑɹ" ]
+		phonology : ["a.ˈmah","a.ˈmax", "a.ˈmaɾ","a.ˈmaɹ" ]
 	},
     {
 		id: 8,
@@ -90,7 +90,7 @@ var wordsDB = [
     {
 		id: 13,
 		ortography : "bem",
-		phonology : ["ˈbe͂ɪ̯"]
+		phonology : ["ˈbẽɪ̯"]
 	},
     {
 		id: 14,
@@ -130,7 +130,7 @@ var wordsDB = [
     {
         id: 21,
         ortography : "cem, sem",
-        phonology : ["ˈse͂ɪ̯"]
+        phonology : ["ˈsẽɪ̯"]
     },
     {
         id: 22,
@@ -140,7 +140,7 @@ var wordsDB = [
     {
         id: 23,
         ortography : "cinco",
-        phonology : ["ˈsi͂.kʊ"]
+        phonology : ["ˈsĩ.kʊ"]
     },
     {
         id: 24,
