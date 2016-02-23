@@ -15,13 +15,54 @@ chances: {
 },
 
 init: function() {
+	app.ptCreateButtons();
 	app.bindEvents();
 	app.newGame();
 },
 
+//function for creating buttons for portuguese game
+ptCreateButtons: function(){
+	//creating consonants
+	var ptConson = [["p", "b", "t", "d", "k", "g", "tʃ", "dʒ"],
+					["f", "v", "s", "z", "ʃ", "ʒ"],
+					["w", "ɫ", "l", "ʎ", "lʲ"],
+					["m", "n", "ɲ", "ỹ"],
+					["x", "ɣ", "h", "ɦ"],
+					["ɾ", "ɹ", "ř"]];
+
+	$("#button-container").append($('<div id="cons-container" align="center"></div>'));
+	ptConson.forEach(function(row){
+		var newRow = $('<div align="right"></div>');
+
+		row.forEach(function(symbol){
+			var newButton = $('<button class="btn-phon btn btn-primary" type="button">' + symbol +'</button>');
+			newRow.append(newButton);
+		});
+		$("#cons-container").append(newRow);
+	});
+
+	var ptVowels = [["i", "e", "ɛ", "a", "ɔ", "o", "u"],
+				 ["ĩ", "ẽ", "ã", "õ", "ũ"],
+				 ["ɪ", "ə", "ʊ"],
+				 ["ɪ̯", "ʊ̯"]];
+
+	$("#button-container").append($('<div id="vowel-container"></div>'));
+	ptVowels.forEach(function(row){
+		var newRow = $('<div align="left"></div>');
+		row.forEach(function(symbol){
+			var newButton = $('<button class="btn-phon btn btn-success" type="button">' + symbol +'</button>');
+			newRow.append(newButton);
+		});
+		$("#vowel-container").append(newRow);
+	});
+
+
+
+},
+
 //listener for the buttons
 bindEvents: function() {
-	$(".btn-phon").on("click", function(){
+	$("body").delegate(".btn-phon", "click", function(){
 		$(this).addClass("disabled");
 		var letter = $(this).text();
 		//tries to fit letter, if no match, chances--

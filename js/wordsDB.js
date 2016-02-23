@@ -102,11 +102,11 @@ var wordsDB = [
 		ortography : "braços",
 		phonology : ["ˈbɾa.sʊs", "ˈbɾa.sʊʃ"]
 	},
-    {
+    /*{
 		id: 16,
 		ortography : "braços",
 		phonology : ["ˈbɾa.sʊs"]
-	},
+	},*/
     {
 		id: 17,
 		ortography : "cabeça",
