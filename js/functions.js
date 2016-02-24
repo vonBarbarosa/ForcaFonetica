@@ -9,7 +9,7 @@ var currentWord = {
 var app = {
 
 chances: {
-	//const value
+	//MAX: const value
 	MAX: 6,
 	current: 0
 },
@@ -40,7 +40,7 @@ ptCreateButtons: function(){
 		});
 		$("#cons-container").append(newRow);
 	});
-
+	//creating vowels
 	var ptVowels = [["i", "e", "ɛ", "a", "ɔ", "o", "u"],
 				 ["ĩ", "ẽ", "ã", "õ", "ũ"],
 				 ["ɪ", "ə", "ʊ"],
@@ -55,9 +55,40 @@ ptCreateButtons: function(){
 		});
 		$("#vowel-container").append(newRow);
 	});
+},
 
+//function for creating buttons for english game
+enCreateButtons: function(){
+	//creating consonants
+	var enConson = [["p", "b", "t", "d", "k", "g", "tʃ", "dʒ"],
+					["θ", "ð", "f", "v", "s", "z", "ʃ", "ʒ"],
+					["h", "m", "n", "ɲ", "l", "ř", "j", "w"]];
 
+	$("#button-container").append($('<div id="cons-container" align="center"></div>'));
+	enConson.forEach(function(row){
+		var newRow = $('<div align="right"></div>');
 
+		row.forEach(function(symbol){
+			var newButton = $('<button class="btn-phon btn btn-primary" type="button">' + symbol +'</button>');
+			newRow.append(newButton);
+		});
+		$("#cons-container").append(newRow);
+	});
+	//creating vowels
+	var enVowels = [["i", "ɛ", "æ", "ɔ", "ʌ", "ʊ", "ə"],
+					["iː", "aː", "ɔː", "uː", "ɜː"],
+					["aɪ", "eɪ", "ɔɪ", "aʊ", "oʊ"],
+					["ɪə", "ɛə", "ʊə"]];
+
+	$("#button-container").append($('<div id="vowel-container"></div>'));
+	enVowels.forEach(function(row){
+		var newRow = $('<div align="left"></div>');
+		row.forEach(function(symbol){
+			var newButton = $('<button class="btn-phon btn btn-success" type="button">' + symbol +'</button>');
+			newRow.append(newButton);
+		});
+		$("#vowel-container").append(newRow);
+	});
 },
 
 //listener for the buttons
@@ -142,6 +173,7 @@ str2phon: function(string){
 	return phonStr;
 },
 
+//"str2phon"s a entire array of strings
 array2phon: function(arr){
 	var newArr = new Array();
 	for (var i = 0; i < arr.length; i++) {
@@ -159,6 +191,7 @@ phon2str: function(phon_arr){
 	return str;
 },
 
+//get a new word from DB and sets currentWord object
 getNewWord: function(){
 	currentWord.index++;
 
@@ -254,14 +287,16 @@ gameOver: function(){
 	app.newGame();
 },
 
+//decrement chances and shows it
 loseOneChance: function(){
 	this.chances.current--;
 	app.refreshHangman();
 },
 
+//refreshes hangman picture
 refreshHangman: function(){
-	//$("#chances").text(this.chances.current);
 	$("#chances").attr("src", "img/forca-" + this.chances.current + ".png");
+	$("#chances").attr("alt", this.chances.current + " chance(s) restante(s)");
 },
 
 //tests victory, returns true or false
