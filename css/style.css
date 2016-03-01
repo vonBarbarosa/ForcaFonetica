@@ -36,6 +36,10 @@ img#chances {
 	padding: 6px;
 }
 
+.btn-game-mode {
+	margin: 5px;
+}
+
 .well {
 	display: inline;
 }

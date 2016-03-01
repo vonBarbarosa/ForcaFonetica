@@ -6,6 +6,10 @@ var currentWord = {
 	answered: []
 };
 
+var GAME_MODE_OPTIONS = ["portuguese", "english", "qwerty-pt", "qwerty-en"];
+
+var gameMode = "";
+
 var app = {
 
 chances: {
@@ -14,9 +18,48 @@ chances: {
 	current: 0
 },
 
-init: function() {
-	app.ptCreateButtons();
+init: function(){
+	$("#upper-container .well").hide();
+	app.createGameModeButtons();
+},
+
+createGameModeButtons: function(){
+	GAME_MODE_OPTIONS.forEach(function(gameOption){
+		var newButton = $('<button class="btn-game-mode btn btn-primary" type="button">' + gameOption +'</button>');
+		$("#button-container").append(newButton);
+	});
+	$("body").delegate(".btn-game-mode", "click", function(){
+		//TODO work with data
+		gameMode = $(this).text();
+
+		$(".btn-game-mode").hide();
+		$("#upper-container .well").show();
+		app.initGame();
+	});
+
+},
+
+initGame: function() {
+	switch (gameMode) {
+		case "english":
+			app.enCreateButtons();
+			break;
+		case "portuguese":
+			app.ptCreateButtons();
+			break;
+		case "qwerty-pt":
+			app.qwertyCreateButtons();
+			break;
+		case "qwerty-en":
+			//TODO qwerty-en
+			alert ("qwerty-en not implemented!");
+			break;
+		default:
+			alert("no working choice!");
+
+	}
 	app.bindEvents();
+	//TODO different newGame for different options
 	app.newGame();
 },
 
@@ -91,24 +134,45 @@ enCreateButtons: function(){
 	});
 },
 
+qwertyCreateButtons: function(){
+	//creating consonants
+	var qwerty = [["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+				  ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+			  	  ["z", "x", "c", "v", "b", "n", "m"]]
+
+	$("#button-container").append($('<div id="qwerty-container" align="center"></div>'));
+	qwerty.forEach(function(row){
+		var newRow = $('<div align="center"></div>');
+
+		row.forEach(function(symbol){
+			var newButton = $('<button class="btn-phon btn btn-primary" type="button">' + symbol +'</button>');
+			newRow.append(newButton);
+		});
+		$("#qwerty-container").append(newRow);
+	});
+},
+
 //listener for the buttons
 bindEvents: function() {
 	$("body").delegate(".btn-phon", "click", function(){
-		$(this).addClass("disabled");
-		var letter = $(this).text();
-		//tries to fit letter, if no match, chances--
-		if (!app.putLetter(letter)){
-			app.loseOneChance();
-		};
+		//tests if not disabled
+		if (!$(this).hasClass("disabled")){
+			$(this).addClass("disabled");
+			var letter = $(this).text();
+			//tries to fit letter, if no match, chances--
+			if (!app.putLetter(letter)){
+				app.loseOneChance();
+			};
 
-		//checks if game is over
-		if (app.chancesAreOver()){
-			app.gameOver();
-		}
-		//tests victory and acts accordingly
-		else if (app.victory()){
-			app.congratulate();
-			app.newGame()
+			//checks if game is over
+			if (app.chancesAreOver()){
+				app.gameOver();
+			}
+			//tests victory and acts accordingly
+			else if (app.victory()){
+				app.congratulate();
+				app.newGame()
+			}
 		}
 	});
 },
